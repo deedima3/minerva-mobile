@@ -17,9 +17,10 @@ Minerva mobile app is an application that can help user or bookreader to search 
 ## Developer Installation
 
 1. Install NPM and Node on your computer and Yarn
-https://nodejs.org/en/download/
-https://yarnpkg.com/getting-started/install
-https://www.npmjs.com/package/npm
+
+- https://nodejs.org/en/download/
+- https://yarnpkg.com/getting-started/install
+- https://www.npmjs.com/package/npm
 
 2. Install Expo CLI
 Install Using `yarn global add expo-cli`
