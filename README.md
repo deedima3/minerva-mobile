@@ -27,6 +27,7 @@ Install Using `yarn global add expo-cli`
 
 3. Connect to your phone using adb or install expo app in your phone.
 	How to install ADB and Enable dev environtment on your phone
+4. Run using `yarn android`
 
 ## Made with :heart: by
 - 2008561042 Jeremi Herodian Abednigo 
