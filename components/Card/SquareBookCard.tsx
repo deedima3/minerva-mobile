@@ -41,10 +41,10 @@ export interface LandscapeBookCardProps {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: 220,
-    height: 130,
-    maxHeight: 130,
-    maxWidth : 220,
+    width: 150,
+    height: 150,
+    maxHeight: 150,
+    maxWidth : 150,
     position: "relative",
     borderRadius : 6,
     overflow : "hidden",
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
   overlayView: {
     position: "absolute",
     zIndex: 50,
-    width: 220,
-    height: 130,
+    width: 150,
+    height: 150,
     flex: 1,
     flexDirection: "column",
     justifyContent: "flex-end",
