@@ -31,6 +31,8 @@ import { View } from "../components/Themed";
 import Explore from "../screens/Explore";
 import Collection from "../screens/Collection";
 import Other from "../screens/Other";
+import Login from "../screens/Login";
+import Register from "../screens/Register";
 
 export default function Navigation({
   colorScheme,
@@ -55,9 +57,20 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+    >
       <Stack.Screen
         name="Root"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Register"
+        component={Register}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MainMenu"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
@@ -68,6 +81,16 @@ function RootNavigator() {
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Search" component={ModalScreen} />
+        <Stack.Screen name="Filter" component={ModalScreen} />
+        <Stack.Screen name="BookDetail" component={ModalScreen} />
+        <Stack.Screen name="CreateCategory" component={ModalScreen} />
+        <Stack.Screen name="Info" component={ModalScreen} />
+        <Stack.Screen name="Help" component={ModalScreen} />
+        <Stack.Screen name="EditProfile" component={ModalScreen} />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ headerShown: false, presentation: "transparentModal" }}>
+        <Stack.Screen name="Loading" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
   );
