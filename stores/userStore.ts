@@ -1,7 +1,7 @@
 import create, { StateCreator } from "zustand";
 import { PersistOptions } from "zustand/middleware";
 import { persist } from "zustand/middleware";
-import AsyncStorage from '@react-native-community/async-storage'
+import { AsyncStorage } from 'react-native';
 
 interface UserState {
   user: string | null | undefined;

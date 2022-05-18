@@ -19,6 +19,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import minerva from "../assets/images/minerva.png";
 import RoundedButton from "../components/Button/RoundedButton";
 import PressableText from "../components/Button/PressableText";
+import CustomTextInput from "../components/Form/CustomTextInput";
 
 const Register = ({ navigation }: any) => {
   const schema = yup.object({
@@ -47,46 +48,46 @@ const Register = ({ navigation }: any) => {
         Daftar Akun jika belum mempunyai akun
       </Text>
       <View style={styles.form}>
-        <View>
-          <Text style={styles.label}>Email*</Text>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                placeholder="deedima@gmail.com"
-              />
-            )}
-            name="email"
-            rules={{ required: true }}
-          />
-          {errors.email && (
-            <Text style={styles.error}>{errors.email.message}</Text>
-          )}
-        </View>
-        <View>
-          <Text style={styles.label}>Password*</Text>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                placeholder="shelovecat3"
-              />
-            )}
-            name="password"
-            rules={{ required: true }}
-          />
-          {errors.password && (
-            <Text style={styles.error}>{errors.email.message}</Text>
-          )}
-        </View>
+      <CustomTextInput
+          control={control}
+          label={"Nama*"}
+          errors={{ errors }}
+          rules={{ required: true }}
+          placeholder={"Dee Dima"}
+          name={"name"}
+        />
+        <CustomTextInput
+          control={control}
+          label={"No Telepon*"}
+          errors={{ errors }}
+          rules={{ required: true }}
+          placeholder={"085xxx"}
+          name={"telp"}
+        />
+        <CustomTextInput
+          control={control}
+          label={"Email*"}
+          errors={{ errors }}
+          rules={{ required: true }}
+          placeholder={"deedima3@gmail.com"}
+          name={"email"}
+        />
+        <CustomTextInput
+          control={control}
+          label={"Password*"}
+          errors={{ errors }}
+          rules={{ required: true }}
+          placeholder={"shelovecat3"}
+          name={"password"}
+        />
+        <CustomTextInput
+          control={control}
+          label={"Password Confirm*"}
+          errors={{ errors }}
+          rules={{ required: true }}
+          placeholder={"shelovecat3"}
+          name={"passwordConfirm"}
+        />
         <View>
           <RoundedButton
             onPress={() => navigation.navigate("Root")}
@@ -108,8 +109,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     paddingHorizontal: 20,
-    paddingVertical: 20,
-    paddingTop: 100,
+    paddingVertical: 50,
   },
   title: {
     fontSize: 28,
@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "flex-start",
-    maxHeight: 250,
-    marginTop: 50,
+    marginTop: 20,
+    maxHeight : 500,
   },
   input: {
     backgroundColor: "#FFFFFF",
