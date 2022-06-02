@@ -33,6 +33,7 @@ import Collection from "../screens/Collection";
 import Other from "../screens/Other";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
+import Book from "../screens/Book";
 
 export default function Navigation({
   colorScheme,
@@ -83,7 +84,7 @@ function RootNavigator() {
         <Stack.Screen name="Modal" component={ModalScreen} />
         <Stack.Screen name="Search" component={ModalScreen} />
         <Stack.Screen name="Filter" component={ModalScreen} />
-        <Stack.Screen name="BookDetail" component={ModalScreen} />
+        <Stack.Screen name="BookDetail" component={Book} />
         <Stack.Screen name="CreateCategory" component={ModalScreen} />
         <Stack.Screen name="Info" component={ModalScreen} />
         <Stack.Screen name="Help" component={ModalScreen} />

@@ -12,12 +12,11 @@ export default function Collection({
   return (
     <View style={styles.container}>
       <SquareBookCard
-        navigate={"/screens/Detail"}
+        navigate={navigation.navigate}
         imageLink={"https://i.pinimg.com/750x/19/5f/6e/195f6ea6b7c43632e8e3abd0ed20bb25.jpg"}
         title={"IDKF"}
         author={"Jeremi"}
-        key={"a"}
-      />
+        key={"a"} id={1}      />
     </View>
   );
 }

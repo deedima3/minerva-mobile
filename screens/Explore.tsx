@@ -1,9 +1,14 @@
+import React, { useEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
+import bookApi from "../api/book/bookApi";
 import CategoryButton from "../components/Card/CategoryButton";
 import LandscapeBookCard from "../components/Card/LandscapeBookCard";
 
 import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
+import { BookDetail } from "../interfaces/book.interface";
+import { randomArrayShuffle } from "../shared/randomizeArray";
+import useUserStore from "../stores/userStore";
 import { RootTabScreenProps } from "../types";
 
 export default function Explore({
@@ -42,20 +47,33 @@ export default function Explore({
     "Isekai",
     "Hentai",
   ];
+
+  const [bookData, setBookData] = React.useState<BookDetail[]>(null!);
+  const user = useUserStore((state) => state.user);
+
+  const fetchData = async () => {
+    let fetched = await bookApi.getAllBook(user!);
+    let randomized = randomArrayShuffle(fetched);
+    setBookData(randomized);
+  }
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.section1}>
         <Text style={styles.title}>Buku Terbaru</Text>
         <ScrollView horizontal={true} style={styles.scrollView}>
-          {data.map((item, index) => {
+          {bookData && bookData.map((item, index) => {
             return (
               <LandscapeBookCard
-                navigate={item.navigation}
-                imageLink={item.imageLink}
-                title={item.title}
-                author={item.author}
-                key={index}
-              />
+                navigate={navigation.navigate}
+                imageLink={item.Image}
+                title={item.JudulSeri}
+                author={item.Penerbit}
+                key={index} id={item.ID}              />
             );
           })}
         </ScrollView>
@@ -63,51 +81,48 @@ export default function Explore({
       <View style={styles.section2}>
         <Text style={styles.title}>Kategori</Text>
         <ScrollView horizontal={true} style={styles.scrollView}>
-          {categoryData.map((item, index) => {
-            return <CategoryButton navigate={""} category={item} key={index} />;
+          {categoryData.map((place, index) => {
+            return <CategoryButton navigate={""} category={place} key={index} />;
           })}
         </ScrollView>
       </View>
       <View style={styles.section3}>
         <Text style={styles.title}>Buku Terbaik</Text>
         <ScrollView horizontal={true} style={styles.scrollView}>
-          {data.map((item, index) => {
+        {bookData && bookData.map((item, index) => {
             return (
               <LandscapeBookCard
-                navigate={item.navigation}
-                imageLink={item.imageLink}
-                title={item.title}
-                author={item.author}
-                key={index}
-              />
+                navigate={navigation.navigate}
+                imageLink={item.Image}
+                title={item.JudulSeri}
+                author={item.Penerbit}
+                key={index} id={item.ID}             />
             );
           })}
         </ScrollView>
         <Text style={styles.title}>Horror Terbaik</Text>
         <ScrollView horizontal={true} style={styles.scrollView}>
-          {data.map((item, index) => {
+        {bookData && bookData.map((item, index) => {
             return (
               <LandscapeBookCard
-                navigate={item.navigation}
-                imageLink={item.imageLink}
-                title={item.title}
-                author={item.author}
-                key={index}
-              />
+                navigate={navigation.navigate}
+                imageLink={item.Image}
+                title={item.JudulSeri}
+                author={item.Penerbit}
+                key={index} id={item.ID}              />
             );
           })}
         </ScrollView>
         <Text style={styles.title}>Buku Ambismu</Text>
         <ScrollView horizontal={true} style={styles.scrollView}>
-          {data.map((item, index) => {
+        {bookData && bookData.map((item, index) => {
             return (
               <LandscapeBookCard
-                navigate={item.navigation}
-                imageLink={item.imageLink}
-                title={item.title}
-                author={item.author}
-                key={index}
-              />
+                navigate={navigation.navigate}
+                imageLink={item.Image}
+                title={item.JudulSeri}
+                author={item.Penerbit}
+                key={index} id={item.ID}             />
             );
           })}
         </ScrollView>

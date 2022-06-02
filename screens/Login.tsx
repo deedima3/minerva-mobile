@@ -13,7 +13,7 @@ import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitErrorHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -22,31 +22,45 @@ import RoundedButton from "../components/Button/RoundedButton";
 import PressableText from "../components/Button/PressableText";
 import useUserStore from "../stores/userStore";
 import CustomTextInput from "../components/Form/CustomTextInput";
+import { AdminAuthApi } from "../api/auth/adminAuth";
 
 const Login = ({ navigation }: any) => {
-  const schema = yup.object({
-    username: yup.string().required("Username wajib diisi"),
-    password: yup.string().required("Password wajib diisi"),
-  });
-
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+  
   const user = useUserStore((state) => state.user);
   const changeUser = useUserStore((state) => state.changeUser);
 
   if (user) {
     navigation.navigate("MainMenu");
   }
+
+  const schema = yup.object({
+    username: yup.string().required("Username wajib diisi"),
+    password: yup.string().required("Password wajib diisi"),
+  });
+
+  type FormValues = {
+    username: string;
+    password: string;
+  };
+
+  const {
+    register,
+    setValue,
+    handleSubmit, 
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const pushData = async (data: any) => {
+    let result = await AdminAuthApi.login(data)
+    changeUser(result)
+  };
+
+  const onError: SubmitErrorHandler<FormValues> = (errors, e) => {
+    alert(errors)
+  }
+
 
   return (
     <View style={styles.container}>
@@ -58,11 +72,11 @@ const Login = ({ navigation }: any) => {
       <View style={styles.form}>
         <CustomTextInput
           control={control}
-          label={"Email*"}
+          label={"Username*"}
           errors={{ errors }}
           rules={{ required: true }}
-          placeholder={"deedima3@gmail.com"}
-          name={"email"}
+          placeholder={"deedima3"}
+          name={"username"}
         />
         <CustomTextInput
           control={control}
@@ -71,10 +85,10 @@ const Login = ({ navigation }: any) => {
           rules={{ required: true }}
           placeholder={"shelovecat3"}
           name={"password"}
-        />
+          />
         <View>
           <RoundedButton
-            onPress={() => navigation.navigate("Register")}
+            onPress={handleSubmit(pushData)}
             text={"Masuk"}
           />
           <PressableText

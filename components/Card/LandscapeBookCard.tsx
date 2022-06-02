@@ -8,9 +8,11 @@ import {
   TouchableHighlight,
 } from "react-native";
 
-const LandscapeBookCard = ({title, author, imageLink, navigate} : LandscapeBookCardProps) => {
+const LandscapeBookCard = ({id, title, author, imageLink, navigate} : LandscapeBookCardProps) => {
 
-  const onClick = () => {}
+  const onClick = () => {
+    navigate("BookDetail", {id: id})
+  }
 
   return (
     <TouchableHighlight underlayColor="#1A1D27" onPress={onClick}>
@@ -32,7 +34,8 @@ const LandscapeBookCard = ({title, author, imageLink, navigate} : LandscapeBookC
 };
 
 export interface LandscapeBookCardProps {
-  navigate : string;
+  id : number;
+  navigate : any;
   imageLink : string;
   title : string;
   author : string;

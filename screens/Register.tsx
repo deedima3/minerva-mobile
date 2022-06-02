@@ -23,8 +23,11 @@ import CustomTextInput from "../components/Form/CustomTextInput";
 
 const Register = ({ navigation }: any) => {
   const schema = yup.object({
-    username: yup.string().required("Username wajib diisi"),
+    name: yup.string().required("Nama wajib diisi"),
     password: yup.string().required("Password wajib diisi"),
+    passwordConfirm:  yup.string().required("Password wajib diisi").oneOf([yup.ref("password")], "Password tidak sama"),
+    email : yup.string().email("Email tidak valid").required("Email wajib diisi"),
+    telp : yup.string().required("Nomor telepon wajib diisi"),
   });
 
   const {
@@ -36,7 +39,7 @@ const Register = ({ navigation }: any) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: any) => {
+  const pushData = (data: any) => {
     console.log(data);
   };
 
@@ -90,7 +93,7 @@ const Register = ({ navigation }: any) => {
         />
         <View>
           <RoundedButton
-            onPress={() => navigation.navigate("Root")}
+            onPress={() => handleSubmit(pushData)}
             text={"Masuk"}
           />
           <PressableText

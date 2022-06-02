@@ -41,6 +41,7 @@ const CustomTextInput = ({
             onChangeText={(value) => onChange(value)}
             value={value}
             placeholder={placeholder}
+            {...name === "password" ? { secureTextEntry: true } : {}}
           />
         )}
         name={name}

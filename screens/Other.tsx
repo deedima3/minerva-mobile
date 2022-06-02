@@ -11,6 +11,7 @@ import { Text, View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 import minerva from "../assets/images/minerva.png";
 import { Entypo } from "@expo/vector-icons";
+import useUserStore from "../stores/userStore";
 
 export default function Explore({
   navigation,
@@ -19,6 +20,14 @@ export default function Explore({
   const onPress = () => {
     console.log("Pressed");
   }
+
+  const changeUser = useUserStore((state) => state.changeUser);
+
+  const handleLogout = () => {
+    changeUser('')
+    navigation.navigate('Root')
+  }
+
   return (
     <View style={styles.container}>
       <Image source={minerva} style={styles.image} />
@@ -56,6 +65,17 @@ export default function Explore({
           <View style={styles.menusub}>
             <Text style={styles.titlewhite}>Help</Text>
             <Text style={styles.subtitlewhite}>Bantuan menggunakan aplikasi minerva</Text>
+          </View>
+        </View>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.touchmenus} underlayColor="#1A1D27" onPress={handleLogout}>
+        <View style={styles.menus}>
+        <View style={styles.logocontainer}>
+        <Entypo name="switch" size={36} color={"#ffffff"} />
+        </View>
+          <View style={styles.menusub}>
+            <Text style={styles.titlewhite}>Logout</Text>
+            <Text style={styles.subtitlewhite}>Logout dari aplikasi minerva</Text>
           </View>
         </View>
         </TouchableHighlight>
